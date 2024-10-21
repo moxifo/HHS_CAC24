@@ -1,0 +1,489 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Custom Font Definition */
+@font-face {
+    font-family: 'Cotham Sans';
+    src: url('fonts/CothamSans.woff2') format('woff2'),
+         url('fonts/CothamSans.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Color Palette */
+:root {
+    --dark-blue: #1B263B;
+    --medium-blue: #415A77;
+    --light-blue: #778DA9;
+    --accent-color: #58CC02;
+}
+
+/* Mobile-first Body Styles */
+body {
+    font-family: 'Cotham Sans', 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--light-blue);
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding-bottom: 60px; /* Space for bottom nav */
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: var(--dark-blue);
+    color: #FFFFFF;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Header Icons */
+.header-icons {
+    display: flex;
+    align-items: center;
+}
+
+.streak {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.streak i {
+    color: #FF4500; /* Orange color for fire icon */
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+.streak #streak-count {
+    font-size: 18px;
+    color: #FFFFFF;
+}
+
+.mood-bar {
+    display: flex;
+    align-items: center;
+}
+
+.sam-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.mood-progress {
+    width: 100px;
+    height: 20px;
+    background-color: #CCCCCC;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.mood-level {
+    height: 100%;
+    width: 50%; /* Initial mood level */
+    background-color: #58CC02; /* Green color for mood level */
+}
+
+/* Lesson Tree */
+.lesson-tree {
+    padding: 20px;
+}
+
+.lesson-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.lesson-item {
+    background-color: var(--medium-blue);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.lesson-item.locked {
+    background-color: #CCCCCC;
+    cursor: default;
+}
+
+.lesson-item .lesson-icon i {
+    font-size: 24px;
+    color: #FFFFFF;
+}
+
+.lesson-item .lesson-name {
+    font-size: 12px;
+    color: #FFFFFF;
+    position: absolute;
+    bottom: -20px;
+}
+
+.lesson-item.locked .lesson-icon i,
+.lesson-item.locked .lesson-name {
+    color: #7F7F7F;
+}
+
+/* Hover Effect on Lesson Items */
+.lesson-item:hover {
+    transform: scale(1.05);
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--dark-blue);
+    border-top: 1px solid #E0E0E0;
+    display: flex;
+}
+
+.nav-item {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    color: #A0A0A0;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.nav-item i {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.nav-item.active,
+.nav-item:hover {
+    color: var(--accent-color);
+}
+
+/* Hide elements with the class 'hidden' */
+.hidden {
+    display: none;
+}
+
+/* Profile Section Styles */
+#profile {
+    padding: 20px;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-content {
+    background-color: var(--medium-blue);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.profile-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.profile-label {
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.profile-item:last-child {
+    border-bottom: none;
+}
+
+#edit-profile-button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: var(--accent-color);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#edit-profile-button:hover {
+    background-color: #45A029;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #FFFFFF;
+    margin: 10% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.close-button {
+    color: #AAAAAA;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#edit-profile-form,
+#login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#edit-profile-form label,
+#login-form label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000000;
+}
+
+#edit-profile-form input,
+#login-form input {
+    padding: 8px;
+    font-size: 16px;
+}
+
+#edit-profile-form button[type="submit"],
+#login-form button[type="submit"] {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: var(--accent-color);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#edit-profile-form button[type="submit"]:hover,
+#login-form button[type="submit"]:hover {
+    background-color: #45A029;
+}
+
+/* Shop Section Styles */
+#shop {
+    padding: 20px;
+}
+
+.shop-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.shop-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.shop-item {
+    background-color: var(--medium-blue);
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shop-item-name {
+    font-size: 18px;
+    color: #FFFFFF;
+}
+
+.shop-item button {
+    padding: 8px 12px;
+    background-color: var(--accent-color);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.shop-item button:hover {
+    background-color: #45A029;
+}
+
+/* Settings Section Styles */
+#settings {
+    padding: 20px;
+}
+
+.settings-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.settings-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.settings-content button {
+    padding: 10px;
+    background-color: var(--accent-color);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.settings-content button:hover {
+    background-color: #45A029;
+}
+
+/* Chat Section */
+#chat {
+    padding: 20px;
+    flex-direction: column;
+    height: calc(100vh - 60px); /* Adjust for header height */
+}
+
+/* Apply display: flex only when the chat is visible */
+#chat:not(.hidden) {
+    display: flex;
+}
+
+.chat-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.chat-instructions {
+    background-color: var(--medium-blue);
+    padding: 10px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.chat-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #F0F0F0;
+    border-radius: 5px;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+}
+
+.chat-message.user {
+    text-align: right;
+}
+
+.chat-message.assistant {
+    text-align: left;
+}
+
+.chat-message p {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+}
+
+.chat-message.user p {
+    background-color: var(--accent-color);
+    color: #FFFFFF;
+}
+
+.chat-message.assistant p {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.chat-input {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.chat-input button {
+    padding: 10px 15px;
+    background-color: var(--accent-color);
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: #45A029;
+}
+
+/* Responsive Design */
+@media (min-width: 600px) {
+    .lesson-row {
+        justify-content: center;
+    }
+    .lesson-item {
+        margin: 0 30px;
+    }
+}
+
+
+

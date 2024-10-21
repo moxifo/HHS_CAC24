@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Social Skills Trainer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Link to FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="modal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <form id="login-form" onsubmit="login(event)">
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" name="login-username" required>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="login-password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content hidden">
+        <!-- Header -->
+        <header>
+            <div class="header-title">InterIntra</div>
+            <div class="header-icons">
+                <!-- Fire icon with streak count -->
+                <div class="streak">
+                    <i class="fas fa-fire"></i>
+                    <span id="streak-count">0</span>
+                </div>
+                <!-- Mood Bar for Sam -->
+                <div class="mood-bar">
+                    <img src="images/sam.png" alt="Sam" class="sam-icon">
+                    <div class="mood-progress">
+                        <div id="mood-level" class="mood-level"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Lessons Section -->
+        <section id="lessons">
+            <!-- Lesson Tree -->
+            <div class="lesson-tree">
+                <!-- Lesson Row -->
+                <div class="lesson-row">
+                    <div class="lesson-item" onclick="openLesson('communication')">
+                        <div class="lesson-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="lesson-name">Communication</div>
+                    </div>
+                    <div class="lesson-item locked">
+                        <div class="lesson-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <div class="lesson-name">Empathy</div>
+                    </div>
+                </div>
+                <!-- Add more lesson rows as needed -->
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="hidden">
+            <div class="profile-header">
+                <h2>Your Profile</h2>
+            </div>
+            <div class="profile-content">
+                <div class="profile-item">
+                    <span class="profile-label">Username:</span>
+                    <span id="profile-username"></span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">Streak Length:</span>
+                    <span id="profile-streak"></span> days
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">XP:</span>
+                    <span id="profile-xp"></span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">Joined:</span>
+                    <span id="profile-joined"></span>
+                </div>
+                <!-- Add Edit Profile Button -->
+                <button id="edit-profile-button" onclick="openEditProfile()">Edit Profile</button>
+            </div>
+        </section>
+
+        <!-- Shop Section -->
+        <section id="shop" class="hidden">
+            <div class="shop-header">
+                <h2>Shop</h2>
+            </div>
+            <div class="shop-content">
+                <div class="shop-item">
+                    <span class="shop-item-name">XP Boost</span>
+                    <button onclick="buyItem('xpBoost')">Buy for 100 XP</button>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-name">Streak Freeze</span>
+                    <button onclick="buyItem('streakFreeze')">Buy for 200 XP</button>
+                </div>
+                <!-- Add more shop items as needed -->
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" class="hidden">
+            <div class="settings-header">
+                <h2>Settings</h2>
+            </div>
+            <div class="settings-content">
+                <button onclick="logout()">Logout</button>
+                <button onclick="showPrivacyPolicy()">Privacy Policy</button>
+            </div>
+        </section>
+
+        <!-- Chat Section -->
+        <section id="chat" class="hidden">
+            <div class="chat-header">
+                <h2>Chat with Sam</h2>
+            </div>
+            <div class="chat-instructions">
+                <p>Talk to Sam to improve your interpersonal skills. Sam is here to help you practice. Remember, Sam will rate your message and provide feedback.</p>
+            </div>
+            <div class="chat-content" id="chat-content">
+                <!-- Chat messages will appear here -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-message" placeholder="Type your message..." onkeypress="sendMessageOnEnter(event)">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </section>
+
+        <!-- Edit Profile Modal -->
+        <div id="edit-profile-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="edit-profile-title">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeEditProfile()" aria-label="Close">&times;</span>
+                <h2 id="edit-profile-title">Edit Profile</h2>
+                <form id="edit-profile-form" onsubmit="saveProfile(event)">
+                    <label for="edit-username">Username:</label>
+                    <input type="text" id="edit-username" name="edit-username" required>
+                    <label for="edit-password">Password:</label>
+                    <input type="password" id="edit-password" name="edit-password">
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav hidden">
+        <a href="#" class="nav-item active" onclick="showHome()">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showProfile()">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showChat()">
+            <i class="fas fa-comments"></i>
+            <span>Chat</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showShop()">
+            <i class="fas fa-store"></i>
+            <span>Shop</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showSettings()">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+    </nav>
+
+    <!-- Include JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
+ 
+
+
