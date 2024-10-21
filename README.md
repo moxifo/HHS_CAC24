@@ -55,7 +55,7 @@ InterIntra is a web application designed to help users improve their interperson
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/interintra.git
+   git clone https://github.com/moxifo/HHS_CAC24.git
    ```
 
 2. **Navigate to the Project Directory**
