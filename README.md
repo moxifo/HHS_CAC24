@@ -36,7 +36,7 @@ InterIntra is a web application designed to help users improve their interperson
 
 ## Demo
 
-![InterIntra Screenshot]([images/interintra_screenshot.png](https://github.com/moxifo/HHS_CAC24/blob/main/InterIntra.png))
+![InterIntra Screenshot](https://github.com/moxifo/HHS_CAC24/blob/main/InterIntra.png)
 
 *Screenshot of the InterIntra application showcasing the main interface.*
 
